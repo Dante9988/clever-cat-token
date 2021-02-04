@@ -15,6 +15,7 @@ contract('Token', ([deployer, receiver]) => {
     const totalSupply = tokens(1000000).toString()
     let token
 
+    // Fetch the token
     beforeEach(async () => {
         token = await Token.new()
     })
