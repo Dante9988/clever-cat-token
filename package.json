@@ -1,5 +1,5 @@
 {
-  "name": "blockchain-developer-bootcamp",
+  "name": "blockchain-developer",
   "version": "0.2.0",
   "description": "Decentralized Ethereum Token Exchange",
   "author": "xadja35@gmail.com",
@@ -22,6 +22,7 @@
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
     "dotenv": "8.2.0",
+    "identicon.js": "^2.3.3",
     "lodash": "4.17.20",
     "moment": "2.29.0",
     "openzeppelin-solidity": "2.1.3",
