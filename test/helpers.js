@@ -1,7 +1,28 @@
 export const EVM_REVERT = 'VM Exception while processing transaction: revert'
-
-export const tokens = (n) => {
+export const ETHER_ADDRESS = '0x0000000000000000000000000000000000000000'
+export const ether = (n) => {
     return new web3.utils.BN(
         web3.utils.toWei(n.toString(), 'ether')
     )
+}
+export const wait = (seconds) => {
+    const milliseconds = seconds * 1000
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+export const tokens = (n) => ether(n)
+
+export const events = () => {
+    let emitEvent
+    let from
+    let to
+    let deployer
+    let balance
+    let user
+    let token
+    it('emits a' + emitEvent + 'event', async () => {
+        const log = result.logs[0]
+        log.event.should.eq(emitEvent)
+        const event = log.args
+    })
 }
