@@ -1,32 +1,35 @@
 import { tokens, EVM_REVERT } from './helpers'
 
-const Token = artifacts.require('./Token')
+const { default: Web3 } = require('web3');
+
+const Token = artifacts.require('./Token');
 
 require('chai')
-  .use(require('chai-as-promised'))
-  .should()
+    .use(require('chai-as-promised'))
+    .should()
 
 contract('Token', ([deployer, receiver, exchange]) => {
-  const name = 'Clever Cat Token'
-  const symbol = 'CLC'
-  const decimals = '18'
-  const totalSupply = tokens(1000000).toString()
-  let token
+    const name = 'Clever Cat Token'
+    const symbol = 'CLC'
+    const decimals = '18'
+    const totalSupply = tokens(1000000).toString()
+    let token
 
-  beforeEach(async () => {
-    token = await Token.new()
-  })
+    beforeEach(async () => {
+        token = await Token.new()
+    })
 
   describe('deployment', () => {
-    it('tracks the name', async () => {
+      it('tracks the name', async () => {
+      // Read token name here...
       const result = await token.name()
+      // Check the token name is 'EtherCoin Token'
       result.should.equal(name)
-    })
-
-    it('tracks the symbol', async ()  => {
-      const result = await token.symbol()
-      result.should.equal(symbol)
-    })
+      })
+     it('tracks the symbol', async () => {
+       const result = await token.symbol()
+       result.should.equal(symbol)
+     })
 
     it('tracks the decimals', async ()  => {
       const result = await token.decimals()
