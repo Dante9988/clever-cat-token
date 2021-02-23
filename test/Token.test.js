@@ -7,8 +7,8 @@ require('chai')
   .should()
 
 contract('Token', ([deployer, receiver, exchange]) => {
-  const name = 'DApp Token'
-  const symbol = 'DAPP'
+  const name = 'Clever Cat Token'
+  const symbol = 'CLC'
   const decimals = '18'
   const totalSupply = tokens(1000000).toString()
   let token
