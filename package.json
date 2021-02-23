@@ -1,12 +1,12 @@
 {
-  "name": "blockchain-developer",
+  "name": "bootcamp",
   "version": "0.2.0",
   "description": "Decentralized Ethereum Token Exchange",
-  "author": "xadja35@gmail.com",
+  "author": "dev@dappuniversity.com",
   "private": true,
   "homepage": ".",
   "engines": {
-    "node": "8.11.1"
+    "node": "14.15.4"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "1.1.0",

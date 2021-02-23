@@ -10,9 +10,8 @@ module.exports = {
       network_id: "*" // Match any network id
     },
   },
-  contracts_directory: './src/contracts/', // Contracts folder inside of source folder
+  contracts_directory: './src/contracts/',
   contracts_build_directory: './src/abis/',
-  // Configure your compilers
   compilers: {
     solc: {
       optimizer: {
@@ -21,4 +20,4 @@ module.exports = {
       }
     }
   }
-};
+}
