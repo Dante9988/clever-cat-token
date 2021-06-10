@@ -6,7 +6,7 @@
   "private": true,
   "homepage": ".",
   "engines": {
-    "node": "14.15.4"
+    "node": "8.11.1"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "1.1.0",
@@ -18,11 +18,11 @@
     "babel-preset-stage-3": "6.24.1",
     "babel-register": "6.26.0",
     "bootstrap": "4.5.2",
+    "identicon.js": "^2.3.3",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
     "dotenv": "8.2.0",
-    "identicon.js": "^2.3.3",
     "lodash": "4.17.20",
     "moment": "2.29.0",
     "openzeppelin-solidity": "2.1.3",
