@@ -1,13 +1,13 @@
-pragma solidity ^0.5.0;
+pragma solidity >=0.7.0 <0.9.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Token {
-    using SafeMath for uint;
+    using SafeMath for uint256;
 
     // Variables
-    string public name = "Clever Cat Token";
-    string public symbol = "CLC";
+    string public name = "Dust Token";
+    string public symbol = "DUST";
     uint256 public decimals = 18;
     uint256 public totalSupply;
     mapping(address => uint256) public balanceOf;
@@ -18,7 +18,7 @@ contract Token {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() public {
-        totalSupply = 1000000 * (10 ** decimals);
+        totalSupply = 1000000 * (10**decimals);
         balanceOf[msg.sender] = totalSupply;
     }
 
@@ -28,7 +28,7 @@ contract Token {
         return true;
     }
 
-    function _transfer(address _from, address _to, uint256 _value) internal {
+    function _transfer( address _from, address _to, uint256 _value) internal {
         require(_to != address(0));
         balanceOf[_from] = balanceOf[_from].sub(_value);
         balanceOf[_to] = balanceOf[_to].add(_value);
@@ -42,7 +42,7 @@ contract Token {
         return true;
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    function transferFrom( address _from, address _to, uint256 _value) public returns (bool success) {
         require(_value <= balanceOf[_from]);
         require(_value <= allowance[_from][msg.sender]);
         allowance[_from][msg.sender] = allowance[_from][msg.sender].sub(_value);

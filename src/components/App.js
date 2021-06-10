@@ -7,10 +7,10 @@ import {
   loadWeb3,
   loadAccount,
   loadToken,
-  loadExchange
+  loadExchange,
+  loadAllOrders
 } from '../store/interactions'
 import { contractsLoadedSelector } from '../store/selectors'
-import { Nav } from 'react-bootstrap'
 
 class App extends Component {
   UNSAFE_componentWillMount() {
@@ -19,29 +19,30 @@ class App extends Component {
 
   async loadBlockchainData(dispatch) {
     const web3 = await loadWeb3(dispatch)
-    await web3.eth.net.getNetworkType()
     const networkId = await web3.eth.net.getId()
     await loadAccount(web3, dispatch)
     const token = await loadToken(web3, networkId, dispatch)
-    if(!token) {
-      window.alert('Token smart contract not detected on the current network. Please select another with Metamask.')
+    if (!token) {
+      window.alert('Token smart contract not detected on the current network. Please select another network with Metamask.')
       return
     }
     const exchange = await loadExchange(web3, networkId, dispatch)
-    if(!exchange) {
-      window.alert('Exchange smart contract not detected on the current network. Please select another with Metamask.')
+    if (!exchange) {
+      window.alert('Exchange smart contract not detected on the current network. Please select another network with Metamask.')
       return
     }
-    
+    // const allOrders = await loadAllOrders(exchange, dispatch)
+    // if (!allOrders) {
+    //   window.alert('Cancelled orders did not load properly.')
+    //   return
+    // }
   }
 
   render() {
     return (
       <div>
         <Navbar />
-        { this.props.contractsLoaded ? <Content /> : 
-        <div className="content"></div> 
-        }
+        { this.props.contractsLoaded ? <Content /> : <div className="content"></div>}
       </div>
     );
   }

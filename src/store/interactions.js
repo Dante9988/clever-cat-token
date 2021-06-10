@@ -3,13 +3,16 @@ import {
   web3Loaded,
   web3AccountLoaded,
   tokenLoaded,
-  exchangeLoaded
+  exchangeLoaded,
+  cancelledOrdersLoaded,
+  filledOrdersLoaded,
+  allOrdersLoaded
 } from './actions'
 import Token from '../abis/Token.json'
 import Exchange from '../abis/Exchange.json'
 
 export const loadWeb3 = async (dispatch) => {
-  if(typeof window.ethereum!=='undefined'){
+  if (typeof window.ethereum !== 'undefined') {
     const web3 = new Web3(window.ethereum)
     dispatch(web3Loaded(web3))
     return web3
@@ -22,7 +25,7 @@ export const loadWeb3 = async (dispatch) => {
 export const loadAccount = async (web3, dispatch) => {
   const accounts = await web3.eth.getAccounts()
   const account = await accounts[0]
-  if(typeof account !== 'undefined'){
+  if (typeof account !== 'undefined') {
     dispatch(web3AccountLoaded(account))
     return account
   } else {
@@ -51,4 +54,24 @@ export const loadExchange = async (web3, networkId, dispatch) => {
     console.log('Contract not deployed to the current network. Please select another network with Metamask.')
     return null
   }
+}
+
+export const loadAllOrders = async (exchange, dispatch) => {
+  // Fetch cancelled orders with the 'Cancel' stream
+  const cancelStream = await exchange.getPastEvents('Cancel', { fromBlock: 0, toBlock: 'latest' })
+  // Format cancelled orders
+  const cancelledOrders = cancelStream.map((event) => event.returnValues)
+  // Add cancelledOrders to the redux store
+  dispatch(cancelledOrdersLoaded(cancelledOrders))
+
+  // Fetch filled orders with the 'Trade' stream
+  const tradeStream = await exchange.getPastEvents('Trade', { fromBlock: 0, toBlock: 'latest' })
+  const filledOrders = tradeStream.map((event) => event.returnValues)
+  dispatch(filledOrdersLoaded(filledOrders))
+
+  // Fetch all orders with the 'Order' stream
+  const orderStream = await exchange.getPastEvents('Order', { fromBlock: 0, toBlock: 'latest' })
+  const allOrders = orderStream.map((event) => event.returnValues)
+  dispatch(allOrdersLoaded(allOrders))
+
 }
